@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Herin's Profile</title>
+    <title>Loading - Miu•Miu's Profile</title>
     <style>
         * {
             margin: 0;
@@ -13,922 +13,202 @@
         }
         
         body {
-            /* Thay thế màu nền bằng hình ảnh */
-            background-image: url('./png/backgroud.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed; /* Giữ hình nền cố định khi cuộn */
-            color: #070606;
-            line-height: 1.6;
-            /* Thêm lớp overlay để làm tối hình nền, giúp nội dung dễ đọc hơn */
+            background-color: #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
             position: relative;
         }
         
-        /* Thêm lớp overlay tối cho nền */
-        body::before {
-            content: "";
-            position: fixed;
+        .background {
+            position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6); /* Màu đen với độ trong suốt 60% */
+            width: 100%;
+            height: 100%;
+            background-image: url('./png/omg.gif');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px);
+            opacity: 0.3;
             z-index: -1;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 1;
-        }
-        
-        .profile-card {
-            background-color: rgba(241, 250, 244, 0.95); /* Làm trong suốt nhẹ */
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            backdrop-filter: blur(5px); /* Hiệu ứng mờ */
-        }
-        
-        .cover-photo {
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .profile-info {
-            padding: 20px;
-            position: relative;
         }
         
         .avatar {
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            border: 5px solid white;
-            background-color: #ddd;
-            position: absolute;
-            left: 20px;
-            top: -75px;
-            overflow: visible; /* Thay đổi từ hidden sang visible để frame có thể hiển thị ra ngoài */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1; /* Thêm z-index để avatar hiển thị trên các phần tử khác */
+            border: 5px solid #ffffff;
+            overflow: visible;
+            position: relative;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .avatar-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 50%; /* Đảm bảo ảnh vẫn tròn */
+            border-radius: 50%;
         }
         
         .frame {
             position: absolute;
-            width: 160px; /* Kích thước lớn hơn avatar */
+            width: 160px;
             height: 160px;
-            top: -5px; /* Điều chỉnh vị trí để frame bao quanh avatar */
+            top: -5px;
             left: -5px;
-            z-index: 2; /* Đảm bảo frame hiển thị trên avatar */
-            pointer-events: none; /* Cho phép click xuyên qua frame */
+            z-index: 2;
+            pointer-events: none;
         }
         
-        .name-bio {
-            margin-left: 160px;
-            margin-bottom: 20px;
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
         }
         
-        h1 {
-            color: #1877f2;
-            margin-bottom: 10px;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #333;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-        
-        .social-link:hover {
-            background-color: #f0f2f5;
-            transform: translateY(-2px);
-        }
-        
-        .social-link i {
-            margin-right: 8px;
-            font-size: 20px;
-        }
-        
-        .facebook {
-            color: #1877f2;
-        }
-        
-        .telegram {
-            color: #0088cc;
-        }
-        
-        .discord {
-            color: #5865F2;
-        }
-
-        .github { 
-            color: #1529e0;
-        }
-        
-        .skills-section {
-            background-color: rgba(255, 254, 254, 0.95);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            margin-top: 20px;
-            backdrop-filter: blur(5px);
-        }
-        
-        .skills-title {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 28px;
-            position: relative;
-        }
-
-        .skills-title:after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #3498db;
-            margin: 10px auto 0;
-        }
-
-        .about-content {
-            color: #34495e;
-            line-height: 1.6;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        .animated-text span {
-            display: inline-block;
-            animation: waveAnimation 2s infinite;
-        }
-        
-        @keyframes waveAnimation {
-            0% { transform: translateY(0); }
-            25% { transform: translateY(-5px); }
-            50% { transform: translateY(0); }
-            75% { transform: translateY(5px); }
-            100% { transform: translateY(0); }
-        }
-        
-        /* Thêm màu sắc thay đổi */
-        @keyframes colorChange {
-            0% { color: #34495e; }
-            33% { color: #3498db; }
-            66% { color: #e74c3c; }
-            100% { color: #34495e; }
-        }
-
-        
-        .skill {
-            margin-bottom: 25px;
-        }
-        
-        .skill-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .skill-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 5px;
-            color: white;
-            font-size: 20px;
-        }
-        
-        .java {
-            background-color: #f89820;
-        }
-        
-        .python {
-            background-color: #306998;
-        }
-        
-        .cpp {
-            background-color: #00599C;
-        }
-        
-        .golang {
-            background-color: #00ADD8;
-        }
-        
-        .skill-name {
+        .loading-text {
+            font-size: 24px;
             font-weight: bold;
-            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
         
-        .skill-percentage {
-            margin-left: auto;
-            color: #666;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 5px;
+        .loading-bar {
+            width: 250px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
             overflow: hidden;
+            position: relative;
         }
         
         .progress {
             height: 100%;
-            border-radius: 5px;
+            background-color: #1877f2;
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
         }
         
-        .java-bar {
-            width: 30%;
-            background-color: #f89820;
-        }
-        
-        .python-bar {
-            width: 60%;
-            background-color: #306998;
-        }
-        
-        .cpp-bar {
-            width: 5%;
-            background-color: #00599C;
-        }
-        
-        .golang-bar {
-            width: 5%;
-            background-color: #00ADD8;
-        }
-        
-        .hobbies {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-top: 10px;
-        }
-        
-        .hobby {
-            flex: 1;
-            min-width: 200px;
-            padding: 15px;
-            background-color: rgba(240, 242, 245, 0.8);
-            border-radius: 8px;
+        .percentage {
+            color: #ffffff;
+            font-size: 14px;
             text-align: center;
-            transition: transform 0.3s ease;
+            margin-top: 8px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
         
-        .hobby:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
         
-        .hobby i {
-            font-size: 2rem;
-            color: #1877f2;
-            margin-bottom: 10px;
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+            z-index: -1;
         }
-        
-        .hobby h3 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .about-content {
-            padding: 10px;
-            background-color: rgba(240, 242, 245, 0.8);
-            border-radius: 8px;
-            margin-top: 10px;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 20px;
-            color: white;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .social-links {
-                flex-direction: column;
-            }
-            .name-bio {
-                margin-left: 0;
-                margin-top: 80px;
-                text-align: center;
-            }
-            .avatar {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .frame {
-                left: 50%;
-                transform: translateX(-50%);
-                top: -5px;
-            }
-        }
-
-
-    .player {
-      background-color: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    }
-
-    .track-info {
-      text-align: center;
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .time {
-      font-size: 14px;
-      width: 40px;
-    }
-
-    .buttons {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-
-    .buttons button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    input[type="range"] {
-      flex: 1;
-      margin: 0 10px;
-      accent-color: white;
-    }
-
-    .volume {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-
-    .volume input {
-      width: 100px;
-    }
-        
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
-    <!-- Thêm Script bảo vệ JS -->
-    <script>
-        // Lưu trữ nội dung HTML gốc
-        let originalHTML = "";
-        let isDevToolsOpen = false;
-        let obfuscatedContent = false;
-        
-        // Tạo mã hóa nội dung HTML
-        function obfuscateHTML() {
-            if (!originalHTML) {
-                originalHTML = document.documentElement.innerHTML;
-            }
-            
-            // Tạo HTML mã hóa
-            let obfuscated = "";
-            for (let i = 0; i < originalHTML.length; i++) {
-                // Thêm các ký tự ngẫu nhiên để làm rối mã
-                if (i % 3 === 0) {
-                    obfuscated += "<!--" + Math.random().toString(36).substring(2, 15) + "-->";
-                }
-                obfuscated += originalHTML.charAt(i);
-            }
-            
-            // Chèn thêm nhiều thành phần vô nghĩa
-            for (let i = 0; i < 100; i++) {
-                const randomDiv = document.createElement('div');
-                randomDiv.id = "decoy_" + Math.random().toString(36).substring(2, 9);
-                randomDiv.style.display = "none";
-                randomDiv.innerHTML = "<!--" + Math.random().toString(36).substring(2, 15) + "-->";
-                document.body.appendChild(randomDiv);
-            }
-            
-            return obfuscated;
-        }
-        
-        // Tạo mã JS mã hóa
-        function obfuscateJS() {
-            // Tạo hàm ngẫu nhiên để làm rối JS
-            const jsFunctions = [];
-            for (let i = 0; i < 50; i++) {
-                const funcName = "security_" + Math.random().toString(36).substring(2, 9);
-                jsFunctions.push(`
-                    function ${funcName}() {
-                        console.log("Security function ${i} activated");
-                        return "${Math.random().toString(36).substring(2, 15)}";
-                    }
-                `);
-            }
-            
-            // Thêm các hàm vào trang
-            const scriptElement = document.createElement('script');
-            scriptElement.textContent = jsFunctions.join("\n");
-            document.head.appendChild(scriptElement);
-        }
-        
-        // Phát hiện DevTools mở (dựa vào kích thước cửa sổ)
-        function detectDevToolsBySize() {
-            const widthThreshold = window.outerWidth - window.innerWidth > 160;
-            const heightThreshold = window.outerHeight - window.innerHeight > 160;
-            
-            if (widthThreshold || heightThreshold) {
-                if (!isDevToolsOpen) {
-                    isDevToolsOpen = true;
-                    onDevToolsOpen();
-                }
-            } else if (isDevToolsOpen) {
-                isDevToolsOpen = false;
-                onDevToolsClose();
-            }
-        }
-        
-        // Phát hiện DevTools mở (dựa vào thời gian thực thi)
-        function detectDevToolsByTiming() {
-            const start = performance.now();
-            debugger;
-            const end = performance.now();
-            
-            if (end - start > 100) { // Nếu trình debugger mở, thì thời gian sẽ lớn
-                if (!isDevToolsOpen) {
-                    isDevToolsOpen = true;
-                    onDevToolsOpen();
-                }
-            }
-        }
-        
-        // Phát hiện DevTools mở (dựa vào console.log)
-        function detectDevToolsByConsole() {
-            const div = document.createElement('div');
-            div.setAttribute('id', 'devtools-detect');
-            div.setAttribute('style', 'display: none');
-            document.body.appendChild(div);
-            
-            console.log(div);
-            console.clear();
-            
-            if (div.getAttribute('style').indexOf('display: none') === -1) {
-                if (!isDevToolsOpen) {
-                    isDevToolsOpen = true;
-                    onDevToolsOpen();
-                }
-            }
-            
-            document.body.removeChild(div);
-        }
-        
-        // Phát hiện DevTools mở (dựa vào console.table)
-        function detectDevToolsByConsoleTable() {
-            let devtoolsOpen = false;
-            
-            const handler = {
-                get: function(target, name) {
-                    if (name === 'length') {
-                        devtoolsOpen = true;
-                    }
-                    return target[name];
-                }
-            };
-            
-            const proxy = new Proxy([], handler);
-            console.table(proxy);
-            
-            if (devtoolsOpen) {
-                if (!isDevToolsOpen) {
-                    isDevToolsOpen = true;
-                    onDevToolsOpen();
-                }
-            }
-        }
-        
-        // Khi DevTools mở
-        function onDevToolsOpen() {
-            console.warn("%cCẢNH BÁO!", "color: red; font-size: 30px; font-weight: bold;");
-            console.warn("%cTrang web này được bảo vệ. Vui lòng không cố gắng kiểm tra hoặc sao chép mã nguồn.", "font-size: 16px;");
-            
-            if (!obfuscatedContent) {
-                obfuscatedContent = true;
-                
-                // 1. Mã hóa HTML
-                document.documentElement.innerHTML = obfuscateHTML();
-                
-                // 2. Thêm các script mã hóa
-                obfuscateJS();
-                
-                // 3. Xóa tất cả các comment trong DOM
-                const iterator = document.createNodeIterator(
-                    document.documentElement,
-                    NodeFilter.SHOW_COMMENT,
-                    () => NodeFilter.FILTER_ACCEPT
-                );
-                let node;
-                while (node = iterator.nextNode()) {
-                    node.parentNode.removeChild(node);
-                }
-                
-                // 4. Xóa thuộc tính id và class để gây khó khăn cho việc chọn phần tử
-                const elements = document.querySelectorAll('*');
-                elements.forEach(el => {
-                    // Tạo thuộc tính id và class ngẫu nhiên
-                    el.id = "id_" + Math.random().toString(36).substring(2, 9);
-                    el.className = "class_" + Math.random().toString(36).substring(2, 9);
-                });
-                
-                // 5. Thêm JS rác
-                for (let i = 0; i < 100; i++) {
-                    eval(`window.temp_${i} = function() { return "${Math.random().toString(36).substring(2, 15)}"; }`);
-                }
-                
-                // 6. Làm rối các attribute của DOM
-                elements.forEach(el => {
-                    // Thêm các thuộc tính vô nghĩa
-                    el.setAttribute("data-" + Math.random().toString(36).substring(2, 9), 
-                                    Math.random().toString(36).substring(2, 15));
-                });
-                
-                // 7. Hiện thông báo cho người dùng
-                const alert = document.createElement('div');
-                alert.style.position = 'fixed';
-                alert.style.top = '0';
-                alert.style.left = '0';
-                alert.style.width = '100%';
-                alert.style.padding = '10px';
-                alert.style.backgroundColor = 'red';
-                alert.style.color = 'white';
-                alert.style.textAlign = 'center';
-                alert.style.zIndex = '99999';
-                alert.innerText = 'Phát hiện có người đang cố gắng xem mã nguồn! Trang web đã được bảo vệ.';
-                document.body.appendChild(alert);
-                
-                // 8. Sau 5 giây, tải lại trang để khôi phục trạng thái
-                setTimeout(() => {
-                    location.reload();
-                }, 5000);
-            }
-        }
-        
-        // Khi DevTools đóng
-        function onDevToolsClose() {
-            if (obfuscatedContent) {
-                // Tải lại trang để khôi phục trạng thái ban đầu
-                location.reload();
-                obfuscatedContent = false;
-            }
-        }
-        
-        // Chặn phím F12 và các phím tắt DevTools
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                (e.ctrlKey && e.shiftKey && e.keyCode === 74) || // Ctrl+Shift+J
-                (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-                e.preventDefault();
-                onDevToolsOpen();
-                return false;
-            }
-        });
-        
-        // Vô hiệu hóa chuột phải
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-            return false;
-        });
-        
-        // Vô hiệu hóa tải xuống hình ảnh
-        document.addEventListener('dragstart', function(e) {
-            e.preventDefault();
-            return false;
-        });
-        
-        // Ghi đè console
-        const originalConsole = console;
-        console = {
-            ...console,
-            log: function() {
-                originalConsole.log("%cCẢNH BÁO: Trang web này được bảo vệ!", "color: red; font-size: 18px;");
-                originalConsole.log(...arguments);
-                detectDevToolsByConsole();
-            },
-            warn: function() {
-                originalConsole.warn(...arguments);
-                detectDevToolsByConsole();
-            },
-            error: function() {
-                originalConsole.error(...arguments);
-                detectDevToolsByConsole();
-            },
-            info: function() {
-                originalConsole.info(...arguments);
-                detectDevToolsByConsole();
-            }
-        };
-        
-        // Khởi tạo bảo vệ
-        window.addEventListener('load', function() {
-            // Kiểm tra DevTools định kỳ
-            setInterval(detectDevToolsBySize, 1000);
-            setInterval(detectDevToolsByTiming, 1000);
-            setInterval(detectDevToolsByConsoleTable, 2000);
-            
-            // Tạo một biến toàn cục ngẫu nhiên để làm rối mã
-            window.securityToken = Math.random().toString(36).substring(2, 15);
-        });
-        
-        // Tạo một "honeypot" - đối tượng đặc biệt sẽ kích hoạt khi được kiểm tra
-        Object.defineProperty(window, '_securityMonitor', {
-            get: function() {
-                onDevToolsOpen();
-                return 'Trang web này được bảo vệ!';
-            }
-        });
-    </script>
-
-<script>
-    // Kiểm tra nếu người dùng nhấn F5 (tức là reload trang)
-    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-        window.location.href = "index.html"; // Quay về index.html
-    }
-
-    // Tạo hiệu ứng hiển thị lần lượt các phần tử khi trang tải xong
-    document.addEventListener('DOMContentLoaded', function() {
-        // Thêm class loaded cho body để tạo hiệu ứng fade in tổng thể
-        setTimeout(function() {
-            document.body.classList.add('loaded');
-        }, 100);
-    });
-</script>
 </head>
 <body>
-    <div class="container">
-        <div class="profile-card">
-            <div class="cover-photo">
-                <img src="./png/speak.jpg" alt="Cover Photo" style="width: 100%; height: 100%; object-fit: cover;">
-            </div>
-            <div class="profile-info">
-                <div class="avatar">
-                    <img class="avatar-img" src="./png/avatar.jpg" alt="Avatar">
-                    <img class="frame" src="https://cdn.discordapp.com/avatar-decoration-presets/a_55c9d0354290afa8b7fe47ea9bd7dbcf" alt="Heart Frame">
-                </div>
-                <div class="name-bio">
-                    <h1>Herin </h1>
-                    <p></> Developer </p>
-                    <p><i class="fas fa-map-marker-alt"></i> Singapore</p>
-                    <div class="player">
-                        <div class="track-info">Wrong Times ( ft. FOWLEX Snowz )</div>
-                        <div class="controls">
-                          <div class="time" id="current">00:00</div>
-                          <input type="range" id="progress" value="0">
-                          <div class="time" id="duration">00:00</div>
-                          <div class="buttons">
-                            <button id="prev">⏮</button>
-                            <button id="play">▶</button>
-                            <button id="next">⏭</button>
-                          </div>
-                        </div>
-                      </div>
-                    
-                    <audio id="audio" src="mp3/music.mp3"></audio>
-                </div>
-                
-                <div class="social-links">
-
-                    </a>
-                    <a href="https://discord.com/users/1120000552231772231" target="_blank" class="social-link">
-                        <i class="fab fa-discord discord"></i>
-                        Discord: @miumiu.cute
-                    </a>
-                    <a href="https://github.com/Miu-Create" target="_blank" class="social-link">
-                        <i class="fab fa-github github"></i> GitHub
-                    </a>
-                </div>
-            </div>
+    <div class="background"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="content">
+        <div class="avatar">
+            <img class="avatar-img" src="./png/mmmb.jpg" alt="Avatar">
+            <img class="frame" src="https://cdn.discordapp.com/avatar-decoration-presets/a_a87e3efa4de2956331831681231ce63b.png?size=96&passthrough=true" alt="Heart Frame">
         </div>
-
-        <div class="skills-section">
-            <h2 class="skills-title">My Hobby</h2>
-            <div class="hobbies">
-                <div class="hobby">
-                    <i class="fas fa-gamepad"></i>
-                    <h3>Game Like</h3>
-                    <p>I Not Like Game</p>
-                </div>
-                <div class="hobby">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Favorite Tube Food</h3>
-                    <p>My favourite food : Sandwich</p>
-                </div>
-                <div class="hobby">
-                    <i class="fas fa-code"></i>
-                    <h3>Study Code</h3>
-                    <p>Tui thích học code khi rảnh</p>
-                </div>
-            </div>
+        <div class="loading-text">Đang tải hồ sơ...</div>
+        <div class="loading-bar">
+            <div class="progress" id="progress"></div>
         </div>
-          
-        <div id="animatedContent" class="about-content">
-            <!-- Nội dung sẽ được thêm bởi JavaScript -->
-        </div>
-        
-        <div class="skills-section">
-            <h2 class="skills-title">Programming Skills</h2>
-            
-            <div class="skill">
-                <div class="skill-header">
-                    <div class="skill-icon java">
-                        <i class="fab fa-java"></i>
-                    </div>
-                    <span class="skill-name">Java</span>
-                    <span class="skill-percentage">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress java-bar"></div>
-                </div>
-                <p>Khum có trình.</p>
-            </div>
-            
-            <div class="skill">
-                <div class="skill-header">
-                    <div class="skill-icon python">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <span class="skill-name">Python</span>
-                    <span class="skill-percentage">1%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress python-bar"></div>
-                </div>
-                <p>Đang học chill chill.</p>
-            </div>
-            
-            <div class="skill">
-                <div class="skill-header">
-                    <div class="skill-icon cpp">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <span class="skill-name">C++</span>
-                    <span class="skill-percentage">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress cpp-bar"></div>
-                </div>
-                <p>Khum có trình.</p>
-            </div>
-            
-            <div class="skill">
-                <div class="skill-header">
-                    <div class="skill-icon golang">
-                        <i class="fab fa-golang"></i>
-                    </div>
-                    <span class="skill-name">Golang</span>
-                    <span class="skill-percentage">0%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress golang-bar"></div>
-                </div>
-                <p>Mới đọc docs.</p>
-            </div>
-        </div>
-        
-        <div class="footer">
-            <p>© 2025 Miu•Miu | Last updated: May 2025</p>
-        </div>
+        <div class="percentage" id="percentage">0%</div>
     </div>
     
     <script>
-        const audio = document.getElementById("audio");
-        const playBtn = document.getElementById("play");
-        const prevBtn = document.getElementById("prev");
-        const nextBtn = document.getElementById("next");
-        const progress = document.getElementById("progress");
-        const current = document.getElementById("current");
-        const duration = document.getElementById("duration");
-      
-        function formatTime(seconds) {
-          const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-          const s = Math.floor(seconds % 60).toString().padStart(2, '0');
-          return `${m}:${s}`;
-        }
-      
-        audio.addEventListener("loadedmetadata", () => {
-          duration.textContent = formatTime(audio.duration);
-          progress.max = audio.duration;
-        });
-      
-        audio.addEventListener("timeupdate", () => {
-          progress.value = audio.currentTime;
-          current.textContent = formatTime(audio.currentTime);
-        });
-      
-        progress.addEventListener("input", () => {
-          audio.currentTime = progress.value;
-        });
-      
-        playBtn.addEventListener("click", () => {
-          if (audio.paused) {
-            audio.play();
-            playBtn.textContent = "⏸";
-          } else {
-            audio.pause();
-            playBtn.textContent = "▶";
-          }
-        });
-      
-        prevBtn.addEventListener("click", () => {
-          audio.currentTime = 0;
-        });
-      
-        nextBtn.addEventListener("click", () => {
-          audio.currentTime = audio.duration;
-        });
-      
-        // Reset nút play khi nhạc kết thúc
-        audio.addEventListener("ended", () => {
-          playBtn.textContent = "▶";
-        });
-        
-        // Animated content
-        const content = [
-            "I'm from Vietnam",
-        ];
-        
-        function animateText() {
-            const contentDiv = document.getElementById('animatedContent');
-            contentDiv.innerHTML = '';
+        // Tạo hiệu ứng particle
+        function createParticles() {
+            const particles = document.getElementById('particles');
+            const particleCount = 50;
             
-            content.forEach((paragraph, pIndex) => {
-                const p = document.createElement('p');
-                p.className = 'animated-text';
-                contentDiv.appendChild(p);
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
                 
-                // Tách từng ký tự trong đoạn văn
-                const chars = paragraph.split('');
+                // Đặt kích thước ngẫu nhiên
+                const size = Math.random() * 5 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
                 
-                chars.forEach((char, cIndex) => {
-                    const span = document.createElement('span');
-                    span.textContent = char === ' ' ? '\u00A0' : char; // Thay khoảng trắng bằng non-breaking space
-                    
-                    // Thêm hiệu ứng delay khác nhau cho mỗi chữ
-                    span.style.animationDelay = `${(cIndex * 0.08)}s`;
-                    
-                    // Thêm hiệu ứng màu sắc
-                    span.style.animation = `waveAnimation 2s infinite ${(cIndex * 0.08)}s, colorChange 6s infinite ${(cIndex * 0.1)}s`;
-                    
-                    p.appendChild(span);
-                });
-            });
+                // Đặt vị trí ngẫu nhiên
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Đặt độ trong suốt ngẫu nhiên
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                
+                // Đặt animation
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+                
+                particles.appendChild(particle);
+            }
         }
         
-        // Chạy animation khi trang đã tải xong
-        window.addEventListener('load', animateText);
+        // Cập nhật thanh tiến trình
+        function updateProgress() {
+            const progress = document.getElementById('progress');
+            const percentage = document.getElementById('percentage');
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    // Chuyển hướng đến trang profile sau khi tải xong
+                    setTimeout(() => {
+                        window.location.href = 'load.html';
+                    }, 500);
+                } else {
+                    width += 1;
+                    progress.style.width = width + '%';
+                    percentage.textContent = width + '%';
+                }
+            }, 30); // Tốc độ loading - có thể điều chỉnh
+        }
+        
+        // Khởi tạo khi trang được tải
+        window.addEventListener('load', () => {
+            createParticles();
+            updateProgress();
+        });
     </script>
 </body>
 </html>
-</html>
-
